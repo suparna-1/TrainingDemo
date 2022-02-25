@@ -1,0 +1,42 @@
+<settings>
+  <pluginGroups>
+    <pluginGroup>org.jbehave</pluginGroup>
+    <pluginGroup>org.sonatype.plugins</pluginGroup>
+  </pluginGroups>
+  <profiles>
+    <profile>
+      <!-- Required for dependencies of JBehave snapshots -->
+      <id>snapshots</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <repositories>
+        <repository>
+          <id>sonatype-nexus-oss</id>
+          <name>Sonatype Nexus OSS</name>
+          <url>https://s01.oss.sonatype.org/content/groups/public/</url>
+          <layout>default</layout>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>sonatype-nexus-oss</id>
+          <name>Sonatype Nexus OSS</name>
+          <url>https://s01.oss.sonatype.org/content/groups/public/</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
+</settings>

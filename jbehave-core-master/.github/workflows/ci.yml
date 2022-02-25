@@ -1,0 +1,39 @@
+name: JBehave CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        platform: [ ubuntu-latest, macos-latest ]
+        java: [ 8, 11, 17 ]
+      fail-fast: false
+
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install JDK ${{ matrix.java }}
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: ${{ matrix.java }}
+          cache: 'maven'
+
+      - name: Install
+        shell: bash
+        run: ./mvnw install -s settings.xml -DskipTests=true -Dmaven.javadoc.skip=true --batch-mode -e --quiet
+
+      - name: Build
+        if: matrix.java != 8
+        shell: bash
+        run: ./mvnw install -s settings.xml -P examples --batch-mode -e
